@@ -15,7 +15,7 @@ class BlogPostController extends Controller
     public function index()
     {
         $blog = BlogPost::all();
-        return $blog;
+        return view('blog.index', compact('blog'));
     }
 
     /**
@@ -25,7 +25,7 @@ class BlogPostController extends Controller
      */
     public function create()
     {
-        //
+        return view('blog.create');
     }
 
     /**
@@ -36,7 +36,12 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newBlog = BlogPost::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'user_id' => 1
+        ]);
+        return redirect(route('blog.show', $newBlog->id));
     }
 
     /**
@@ -47,7 +52,7 @@ class BlogPostController extends Controller
      */
     public function show(BlogPost $blogPost)
     {
-        //
+        return view('blog.show', compact('blogPost'));
     }
 
     /**
