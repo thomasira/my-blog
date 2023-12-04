@@ -15,6 +15,12 @@
                 <h1 class="display-4">{{ config('app.name') }}</h1>
             </header>
         </div>
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Wowy! </strong> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <hr>
         @yield('content')
     </div>
