@@ -24,3 +24,6 @@ Route::post('blog-create', [BlogPostController::class, 'store'])->name('blog.sto
 Route::get('blog-edit/{blogPost}', [BlogPostController::class, 'edit'])->name('blog.edit');
 Route::put('blog-edit/{blogPost}', [BlogPostController::class, 'update'])->name('blog.update');
 Route::delete('blog/{blogPost}', [BlogPostController::class, 'destroy'])->name('blog.delete');
+
+Route::get('query', [BlogPostController::class, 'query']);
+Route::get('blog-page', [BlogPostController::class, 'pagination']);

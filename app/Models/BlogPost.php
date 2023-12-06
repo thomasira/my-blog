@@ -23,4 +23,9 @@ class BlogPost extends Model
         'body',
         'user_id'
     ];
+
+    /* joining blog table with user table */
+    public function blogHasUser() {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
 }

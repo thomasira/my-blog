@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-12">
             <p>{{ $blogPost->body }}</p>
-            <p>Author: <strong>{{ $blogPost->user_id }}</strong></p>
+            <p>Author: <strong>{{ $blogPost->blogHasUser->name }}</strong></p>
         </div>
     </div>
     <div class="row">
