@@ -54,9 +54,28 @@ class CustomAuthController extends Controller
     public function authentification(Request $request) 
     {   
         $request->validate([
-            'email' => 'email | required',
+            'email' => 'email | required | exists:users',
             'password' => 'min:6 | max: 20 | alpha_dash'
         ]);
-        return $request;
+
+        $credentials = $request->only('email', 'password');
+        if(!Auth::validate($credentials)) {
+            return redirect(route('login'))->withErrors(trans('auth.password'))->withInput();
+        }
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        Auth::login($user);
+        return redirect()->intended(route('blog.index'));
+    }
+
+    public function logout() 
+    {
+        Auth::logout();
+        return redirect(route('login'));
+    }
+
+    public function userList() 
+    {
+        $users = User::select()->paginate(5);
+        return view('auth.user-list', compact('users'));
     }
 }

@@ -29,7 +29,7 @@
             </div>
         </div>
         <div>
-            <a href="{{ route('blog.index') }}" class="btn btn-primary">Back</a>
+            <a href="{{ route('blog.show', $blogPost->id) }}" class="btn btn-primary">Back</a>
         </div>
     </div>
    

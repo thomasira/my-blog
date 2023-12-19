@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /* to use raw queries */
 use Illuminate\Support\Facades\DB;
@@ -42,7 +43,7 @@ class BlogPostController extends Controller
         $newBlog = BlogPost::create([
             'title' => $request->title,
             'body' => $request->body,
-            'user_id' => 1
+            'user_id' => Auth::user()->id
         ]);
         return redirect(route('blog.show', $newBlog))->withSuccess('article créé!');
     }
@@ -98,7 +99,8 @@ class BlogPostController extends Controller
         
     }
 
-    public function pagination() {
+    public function pagination() 
+    {
         $blog = BlogPost::select()->paginate(5);
         return view('blog.pagination', compact('blog'));
     }
