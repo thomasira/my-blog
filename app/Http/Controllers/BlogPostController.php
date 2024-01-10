@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
 
 /* to use raw queries */
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,8 @@ class BlogPostController extends Controller
      */
     public function create()
     {
-        return view('blog.create');
+        $categories = Category::categorySelect();
+        return view('blog.create', compact('categories'));
     }
 
     /**
@@ -43,7 +45,8 @@ class BlogPostController extends Controller
         $newBlog = BlogPost::create([
             'title' => $request->title,
             'body' => $request->body,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'category_id' => $request->category_id
         ]);
         return redirect(route('blog.show', $newBlog))->withSuccess('article créé!');
     }
@@ -66,8 +69,9 @@ class BlogPostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(BlogPost $blogPost)
-    {
-        return view('blog.edit', compact('blogPost'));
+    {        
+        $categories = Category::categorySelect();
+        return view('blog.edit', compact('blogPost', 'categories'));
     }
 
     /**
@@ -81,7 +85,8 @@ class BlogPostController extends Controller
     {
         $blogPost->update([
             'title' => $request->title,
-            'body' => $request->body
+            'body' => $request->body,
+            'category_id' => $request->category_id
         ]);
         return redirect(route('blog.show', $blogPost))->withSuccess('article mis a jour!');
     }

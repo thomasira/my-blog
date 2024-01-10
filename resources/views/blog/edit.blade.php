@@ -17,8 +17,20 @@
                             <label>Title
                                 <input type="text" id="title" name="title" class="form-control" value="{{ $blogPost->title }}">
                             </label>
+                        </div>
+                        <div class="control-group d-flex flex-column">
                             <label>Content
                                 <textarea name="body" id="body" cols="30" rows="10" placeholder="your message here..." class="form-control">{{ $blogPost->body }}"</textarea>
+                            </label>
+                        </div>
+                        <div class="control-group d-flex flex-column">
+                            <label>Category
+                                <select name="category_id">
+                                    <option value="">Select category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ $category->id === $blogPost->category_id ? 'selected' : '' }}> {{ $category->category}}</option>
+                                @endforeach
+                                </select>
                             </label>
                         </div>
                     </div>

@@ -19,6 +19,16 @@
                                 <textarea name="body" id="body" cols="30" rows="10" placeholder="your message here..." class="form-control"></textarea>
                             </label>
                         </div>
+                        <div class="control-group col-12">
+                            <label>Category
+                                <select name="category_id">
+                                    <option value="">Select a category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}"> {{ $category->category }}</option>
+                                @endforeach
+                                </select>
+                            </label>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Ajouter</button>

@@ -16,11 +16,13 @@
                 <th scope="row">{{ $user->id }}</th>
                 <td>{{ $user->name }}</td>
                 <td>
-                @forelse($user->userHasBlog as $article)
-                    <a href="{{route('blog.show', $article->id)}}">{{ $article->title }}</a>
-                @empty
-                    aucun articles
-                @endforelse
+                    <ul>
+                    @forelse($user->userHasBlog as $article)
+                        <li><a href="{{route('blog.show', $article->id)}}">{{ $article->title }}</a></li>
+                    @empty
+                        <li> aucun articles</li>
+                    @endforelse
+                    </ul>
                 </td>
             </tr>
         @endforeach

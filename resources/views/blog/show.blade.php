@@ -7,6 +7,7 @@
     <div class="row">
         <header class="col-12 text-center pt-2">
             <h2 class="font-weight-bold text-primary">{{ $blogPost->title }}</h2>
+            <p>Category: <strong>{{ $blogPost->blogHasCategory ? $blogPost->blogHasCategory->category : 'no category' }}</strong> </p>
         </header>
     </div>
     <hr>
