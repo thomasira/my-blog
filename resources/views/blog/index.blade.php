@@ -3,10 +3,10 @@
 @section('content')
     <div class="row">
         <div class="col-8">
-            <p>Cliquez sur un article pour le consulter</p> 
+            <p>@lang('lang.text_add-title')</p>
         </div>
         <div class="col-4">
-            <a href="{{ route('blog.create') }}" class="btn btn-primary">Ajouter</a>      
+            <a href="{{ route('blog.create') }}" class="btn btn-primary">@lang('lang.text_add-button')</a>      
         </div>
     </div>
     <hr>

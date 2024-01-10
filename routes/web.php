@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CustomAuthController;
-
+use App\Http\Controllers\LocalizationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,7 @@ use App\Http\Controllers\CustomAuthController;
 */
 
 Route::get('/', function () { return view('welcome'); });
+Route::get('lang/{locale}', [LocalizationController::class, 'index'])->name('lang');
 
 Route::get('blog', [BlogPostController::class, 'index'])->name('blog.index');
 Route::get('blog/{blogPost}', [BlogPostController::class, 'show'])->name('blog.show');

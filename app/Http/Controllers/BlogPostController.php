@@ -48,7 +48,7 @@ class BlogPostController extends Controller
             'user_id' => Auth::user()->id,
             'category_id' => $request->category_id
         ]);
-        return redirect(route('blog.show', $newBlog))->withSuccess('article créé!');
+        return redirect(route('blog.show', $newBlog))->withSuccess(trans('lang.text_blog_success'));
     }
 
     /**
