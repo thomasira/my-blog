@@ -4,8 +4,73 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe33f98a750b8c5a51b30c78bd3fab21",
+    "content-hash": "abcaf63657760478a9e073e8f1823cc6",
     "packages": [
+        {
+            "name": "aglipanci/laravel-eloquent-case",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aglipanci/laravel-eloquent-case.git",
+                "reference": "62894c0d87f185d7c766afc0f721acd469cff252"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aglipanci/laravel-eloquent-case/zipball/62894c0d87f185d7c766afc0f721acd469cff252",
+                "reference": "62894c0d87f185d7c766afc0f721acd469cff252",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^8.0|^9.0|^10",
+                "illuminate/support": "^8.0|^9.0|^10",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.6",
+                "nunomaduro/larastan": "^1.0",
+                "orchestra/testbench": "^6.23.0|^7.0.0",
+                "phpunit/phpunit": "^9.3.9"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AgliPanci\\LaravelCase\\LaravelCaseServiceProvider"
+                    ],
+                    "aliases": {
+                        "CaseBuilder": "CaseBuilder"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AgliPanci\\LaravelCase\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Agli Panci",
+                    "email": "agli.panci@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Eduard Lleshi",
+                    "email": "eduard.lleshi@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Adds CASE statement support to Laravel Query Builder.",
+            "homepage": "https://github.com/aglipanci/laravel-case",
+            "support": {
+                "issues": "https://github.com/aglipanci/laravel-eloquent-case/issues",
+                "source": "https://github.com/aglipanci/laravel-eloquent-case/tree/2.0"
+            },
+            "time": "2023-02-15T08:47:55+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
