@@ -18,6 +18,8 @@ class Localization
     public function handle(Request $request, Closure $next)
     {
         if (session()->has('locale')) {
+            if(session()->get('locale') != 'en') session()->put('localeDB', '_'.session()->get('locale'));
+            else session()->put('localeDB', '');
             App::setlocale(session()->get('locale'));
         }
         return $next($request);
