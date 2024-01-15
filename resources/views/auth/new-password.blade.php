@@ -1,14 +1,14 @@
 @extends('layouts.layout')
-@section('title', 'Login')
+@section('title', 'New password')
 @section('content')
 <section class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <form method="post" action="{{ route('authent') }}">
+                <form method="post">
                 @csrf
                     <div class="card-header text-center">
-                        <h2>Log in</h2>
+                        <h2>Create your new password</h2>
                     </div>
                     <div class="card-body">
                     @if(!$errors->isEmpty())
@@ -19,12 +19,6 @@
                         </ul>
                     @endif
                         <div class="control-group d-grid gap-3">
-                            <label class="col-12">Email
-                                <input type="email" name="email" class="form-control" value="{{ old('email') }}">
-                                @if($errors->has('email'))
-                                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                                @endif
-                            </label>
                             <label class="col-12">Password
                                 <input type="password" name="password" class="form-control">
                                 @if($errors->has('password'))
@@ -32,12 +26,14 @@
                                 @endif
                             </label>
                         </div>
+                        <div class="control-group d-grid gap-3">
+                            <label class="col-12">Confirm password
+                                <input type="password" name="password_confirmation" class="form-control">
+                            </label>
+                        </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Connexion</button>
-                    </div>
-                    <div>
-                        <a href="{{ route('forgot.password')}}">Forgot password</a>
+                        <button type="submit" class="btn btn-success">Reset password</button>
                     </div>
                 </form>
             </div>

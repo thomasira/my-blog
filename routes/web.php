@@ -17,6 +17,10 @@ use App\Http\Controllers\LocalizationController;
 
 Route::get('/', function () { return view('welcome'); });
 Route::get('lang/{locale}', [LocalizationController::class, 'index'])->name('lang');
+Route::get('forgot-password', [CustomAuthController::class, 'forgotPassword'])->name('forgot.password');
+Route::post('forgot-password', [CustomAuthController::class, 'tempPassword'])->name('temp.password');
+Route::get('new-password/{user}/{tempPassword}', [CustomAuthController::class, 'newPassword'])->name('new.password');
+Route::post('new-password/{user}/{tempPassword}', [CustomAuthController::class, 'storeNewPassword'])->name('store.new.password');
 
 Route::get('blog', [BlogPostController::class, 'index'])->name('blog.index');
 Route::get('blog/{blogPost}', [BlogPostController::class, 'show'])->name('blog.show');

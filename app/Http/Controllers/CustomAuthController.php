@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class CustomAuthController extends Controller
 {
@@ -40,13 +42,22 @@ class CustomAuthController extends Controller
         $request->validate([
             'name' => 'min:3 | max:45',
             'email' => 'required | email | unique:users',
-            'password' => 'min:6 | max: 20'
+            'password' => 'min:6 | max:20'
         ]);
 
         $user = new User;
         $user->fill($request->all());
         $user->password = Hash::make($request->password);
         $user->save();
+
+        $to_name = $request->name;
+        $to_email = $request->email;
+        $body = "<a href='http://www.localhost:8000'>Cliquez pour modifier votre mot de passe</a>";
+
+        Mail::send('email.mail', ['name' => $to_name, 'body' => $body], 
+        function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('login test');
+        });
 
         return redirect(route('login'))->withSuccess('account created!');
     }
@@ -77,5 +88,54 @@ class CustomAuthController extends Controller
     {
         $users = User::select()->paginate(5);
         return view('auth.user-list', compact('users'));
+    }
+
+    public function forgotPassword() 
+    {
+        return view('auth.forgot-password');
+    }
+
+    public function tempPassword(Request $request) 
+    {
+        $request->validate([
+            'email' => 'required | email | exists:users',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        $userId = $user->id;
+
+        $tempPassword = Str::random(20);
+        $user->temp_password = $tempPassword;
+        $user->save();
+
+        $to_name = $user->name;
+        $to_email = $user->email;
+        $body = "<a href='http://www.localhost:8000/new-password/$userId/$tempPassword'>Cliquez pour réinitialiser votre mot de passe</a>";
+
+        Mail::send('email.mail', ['name' => $to_name, 'body' => $body], 
+        function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('login test');
+        });
+
+        return redirect(route('/'));
+    }
+
+    public function newPassword(User $user, $tempPassword) 
+    {
+        if($user->temp_password === $tempPassword) {
+            return view('auth.new-password');
+        } else return redirect('forgot-password')->withErrors(trans('auth.failed'));
+    }
+
+    public function storeNewPassword(User $user, $tempPassword, Request $request) {
+        if($user->temp_password === $tempPassword) {
+            $request->validate([
+                'password' => 'min:6 | max:20 | confirmed'
+            ]);
+            $user->password = Hash::make($request->password);
+            $user->temp_password = null;
+            $user->save();
+            return redirect(route('login'))->withSuccess('password changed!');
+        } else return redirect('forgot-password')->withErrors(trans('auth.failed'));
     }
 }
