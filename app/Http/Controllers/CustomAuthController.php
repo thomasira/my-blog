@@ -117,7 +117,7 @@ class CustomAuthController extends Controller
             $message->to($to_email, $to_name)->subject('login test');
         });
 
-        return redirect(route('/'));
+        return redirect(route('login'))->withSuccess('a message was sent to your account');
     }
 
     public function newPassword(User $user, $tempPassword) 
