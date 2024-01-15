@@ -114,7 +114,7 @@ class CustomAuthController extends Controller
 
         Mail::send('email.mail', ['name' => $to_name, 'body' => $body], 
         function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('login test');
+            $message->to($to_email, $to_name)->subject('reset password');
         });
 
         return redirect(route('login'))->withSuccess('a message was sent to your account');
