@@ -6,6 +6,8 @@ use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
+/* use PDF; */
+use Barryvdh\DomPDF\Facade\PDF;
 
 /* to use raw queries */
 use Illuminate\Support\Facades\DB;
@@ -159,4 +161,11 @@ class BlogPostController extends Controller
 
         return $blog->blogHasUser->name; 
     }
+
+    public function showPdf(BlogPost $blogPost)
+    {
+        $pdf = PDF::loadView('blog.show-pdf', compact('blogPost'));
+        return $pdf->download('blog-'.$blogPost->id.'.pdf');
+    }
+
 }

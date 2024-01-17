@@ -3,7 +3,10 @@
 @section('content')
 
 <section class="container">
-    <a href="{{ route('blog.index') }}" class="btn btn-success">Back</a>
+    <div class="mb-4">
+      <a href="{{ route('blog.index') }}" class="btn btn-success">Back</a>
+      <a href="{{ route('blog.show-pdf', $blogPost->id) }}" class="btn btn-primary">get the pdf</a>
+    </div>
     <div class="row">
         <header class="col-12 text-center pt-2">
             <h2 class="font-weight-bold text-primary">{{ $blogPost->title }}</h2>
@@ -42,6 +45,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
+
       </div>
     </div>
   </div>
@@ -69,6 +73,7 @@
             @csrf
             <input class="btn btn-danger" type="submit" value="delete">
         </form>
+
       </div>
     </div>
   </div>
