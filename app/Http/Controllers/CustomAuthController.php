@@ -93,8 +93,10 @@ class CustomAuthController extends Controller
 
     public function userList() 
     {
-        $users = User::select()->paginate(5);
-        return view('auth.user-list', compact('users'));
+        if(Auth::user()->can('edit-users')) {
+            $users = User::select()->paginate(5);
+            return view('auth.user-list', compact('users'));
+        } else return redirect(route('login'));
     }
 
     public function forgotPassword() 

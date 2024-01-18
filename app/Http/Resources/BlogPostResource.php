@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\BlogPost;
 
 class BlogPostResource extends JsonResource
 {
@@ -21,7 +22,8 @@ class BlogPostResource extends JsonResource
             'id' => $this->id,
             'title' => isset(json_decode($this->title)->$locale) && json_decode($this->title)->$locale != "" ? json_decode($this->title)->$locale : json_decode($this->title)->$default,
             'body' => isset(json_decode($this->body)->$locale) && json_decode($this->body)->$locale != ""? json_decode($this->body)->$locale : json_decode($this->body)->$default,
-            'category' => $this->category
+            'category' => $this->blogHasCategory ? $this->blogHasCategory->category : 'no category',
+            'author' => $this->blogHasUser->name
         ];
     }
 }

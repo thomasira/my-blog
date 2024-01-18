@@ -30,7 +30,7 @@
                     <a class="nav-link" href="{{route('auth.create')}}">@lang('lang.text_registration')</a>
                     <a class="nav-link" href="{{route('login')}}">@lang('lang.text_login')</a>
                 @else
-                    <a class="nav-link" href="{{route('user.list')}}">@lang('lang.text_user-list')</a>
+                    @can('edit-users')<a class="nav-link" href="{{route('user.list')}}">@lang('lang.text_user-list')</a>@endcan
                     <a class="nav-link" href="{{route('logout')}}">@lang('lang.text_logout')</a>
                 @endguest
             </div>

@@ -65,8 +65,6 @@ class BlogPostController extends Controller
     public function show(BlogPost $blogPost)
     {
         $blog = BlogPostResource::collection(BlogPost::get()->where('id', $blogPost->id))->resolve()[0];
-        $blog['category'] = $blogPost->blogHasCategory ? $blogPost->blogHasCategory->category : 'no category';
-        $blog['author'] = $blogPost->blogHasUser->name;
         return view('blog.show', compact('blog'));
     }
 
