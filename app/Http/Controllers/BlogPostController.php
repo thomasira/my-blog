@@ -6,6 +6,7 @@ use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
+use App\Http\Resources\BlogPostResource;
 /* use PDF; */
 use Barryvdh\DomPDF\Facade\PDF;
 
@@ -21,7 +22,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        $blog = BlogPost::all();
+        $blog = BlogPostResource::collection(BlogPost::all())->resolve();
         return view('blog.index', compact('blog'));
     }
 
@@ -44,9 +45,11 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
+        $title = '{"en":"'.$request->title.'", "fr":"'.$request->title_fr.'"}';
+        $body = '{"en":"'.$request->body.'", "fr":"'.$request->body_fr.'"}';
         $newBlog = BlogPost::create([
-            'title' => $request->title,
-            'body' => $request->body,
+            'title' => $title,
+            'body' => $body,
             'user_id' => Auth::user()->id,
             'category_id' => $request->category_id
         ]);
@@ -61,7 +64,10 @@ class BlogPostController extends Controller
      */
     public function show(BlogPost $blogPost)
     {
-        return view('blog.show', compact('blogPost'));
+        $blog = BlogPostResource::collection(BlogPost::get()->where('id', $blogPost->id))->resolve()[0];
+        $blog['category'] = $blogPost->blogHasCategory ? $blogPost->blogHasCategory->category : 'no category';
+        $blog['author'] = $blogPost->blogHasUser->name;
+        return view('blog.show', compact('blog'));
     }
 
     /**

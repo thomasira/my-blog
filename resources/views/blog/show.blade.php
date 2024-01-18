@@ -5,24 +5,24 @@
 <section class="container">
     <div class="mb-4">
       <a href="{{ route('blog.index') }}" class="btn btn-success">Back</a>
-      <a href="{{ route('blog.show-pdf', $blogPost->id) }}" class="btn btn-primary">get the pdf</a>
+      <a href="{{ route('blog.show-pdf', $blog['id']) }}" class="btn btn-primary">get the pdf</a>
     </div>
     <div class="row">
         <header class="col-12 text-center pt-2">
-            <h2 class="font-weight-bold text-primary">{{ $blogPost->title }}</h2>
-            <p>Category: <strong>{{ $blogPost->blogHasCategory ? $blogPost->blogHasCategory->category : 'no category' }}</strong> </p>
+            <h2 class="font-weight-bold text-primary">{{ $blog['title'] }}</h2>
+            <p>Category: <strong>{{ $blog['category'] }}</strong> </p>
         </header>
     </div>
     <hr>
     <div class="row">
         <div class="col-12">
-            <p>{{ $blogPost->body }}</p>
-            <p>Author: <strong>{{ $blogPost->blogHasUser->name }}</strong></p>
+            <p>{{ $blog['body'] }}</p>
+            <p>Author: <strong>{{ $blog['author'] }}</strong></p>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
-            <a href="{{ route('blog.edit', $blogPost->id) }}" class="btn btn-primary">Edit</a>
+            <a href="{{ route('blog.edit', $blog['id']) }}" class="btn btn-primary">Edit</a>
         </div>
         <div class="col-6">
 

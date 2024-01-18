@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <ul>
                     @forelse($blog as $article)
-                        <li><a href="{{ route('blog.show', $article->id) }}">{{ $article->title }}</a></li>
+                        <li><a href="{{ route('blog.show', $article['id']) }}">{{ $article['title'] }}</a></li>
                     @empty
                         <li><h4 class="text-danger">Aucun article disponible</h4></li>
                     @endforelse
