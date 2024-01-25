@@ -65,6 +65,8 @@ class BlogPostController extends Controller
     public function show(BlogPost $blogPost)
     {
         $blog = BlogPostResource::collection(BlogPost::get()->where('id', $blogPost->id))->resolve()[0];
+        $user_email = Auth::user()->email;
+        return $user_email;
         return view('blog.show', compact('blog'));
     }
 

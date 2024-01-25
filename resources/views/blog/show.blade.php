@@ -73,7 +73,6 @@
             @csrf
             <input class="btn btn-danger" type="submit" value="delete">
         </form>
-
       </div>
     </div>
   </div>

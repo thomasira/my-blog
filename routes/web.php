@@ -40,6 +40,9 @@ Route::post('registration', [CustomAuthController::class, 'store'])->name('auth.
 Route::post('authent', [CustomAuthController::class, 'authentification'])->name('authent');
 
 Route::get('user-list', [CustomAuthController::class, 'userList'])->name('user.list')->middleware('auth');
+
+
+
 Route::get('blog-pdf/{blogPost}', [BlogPostController::class, 'showPdf'])->name('blog.show-pdf');
 
 

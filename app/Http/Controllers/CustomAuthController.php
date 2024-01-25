@@ -81,7 +81,6 @@ class CustomAuthController extends Controller
         Auth::login($user);
         if($user->role == 1) $user->assignRole('Admin');
         elseif ($user->role == 2) $user->assignRole('Editor');
-        
         return redirect()->intended(route('blog.index'));
     }
 
